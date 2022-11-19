@@ -1,0 +1,155 @@
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.fc .fc-button-primary {
+  background-color: transparent !important;
+  border: 1px solid #dadce0;
+  color: #5f6368 !important;
+  font-family: "Roboto", sans-serif;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.fc-next-button:hover,
+.fc-prev-button:hover {
+  border-radius: 50% !important;
+  border: 1px solid #dadce0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fc-next-button,
+.fc-prev-button {
+  border: none !important;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+  border-color: #5f6368;
+}
+
+.fc .fc-button-primary:focus,
+.fc .fc-button-primary:not(:disabled).fc-button-active:focus,
+.fc .fc-button-primary:not(:disabled):active:focus {
+  border-color: #5f6368 !important;
+  box-shadow: none !important;
+}
+
+.fc-today-button {
+  background: white !important;
+  color: #5f6368 !important;
+  border: 1px solid #dadce0 !important;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.0107142857em;
+  text-transform: none;
+  font-family: "Roboto", sans-serif;
+}
+.fc .fc-toolbar.fc-header-toolbar {
+  margin: 10px 0px;
+}
+
+.fc .fc-button-primary:hover {
+  border: none;
+}
+
+.fc .fc-button .fc-icon {
+  font-size: 1.2em;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  color: #70757a;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.fc .fc-daygrid-day-number {
+  color: #3c4043;
+}
+
+.fc .fc-daygrid-day-top {
+  flex-direction: column;
+  text-align: center;
+}
+.fc .fc-toolbar-title {
+  font-size: 22px;
+  margin: 0;
+  color: #3c4043;
+  font-weight: 400;
+  line-height: 28px;
+  font-family: system-ui;
+}
+
+.ui-datepicker-title,
+.ui-datepicker table {
+  color: #5f6368;
+}
+.fc-event-title-container,
+.fc-daygrid-dot-event .fc-event-title {
+  font-size: 13px;
+  text-transform: none;
+}
+
+/**
+Picker css
+**/
+.ui-datepicker td span,
+.ui-datepicker td a {
+  border: none !important;
+  background-color: white !important;
+}
+
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight,
+.ui-widget-header .ui-state-highlight {
+  border: 1px solid #1a73e8 !important;
+  background: #1a73e8 !important;
+  color: #fff !important;
+}
+
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
+  border: 1px solid #d2e3fc !important;
+  background: #d2e3fc !important;
+  color: #fff !important;
+}
+
+.ui-widget.ui-widget-content {
+  border: none;
+  font-family: system-ui;
+  margin-top: 16%;
+}
+
+.ui-datepicker .ui-datepicker-header {
+  background: white;
+  border: none;
+}
+
+.ui-icon-circle-triangle-e {
+  background-position: -33px 0px;
+}
+
+.ui-icon-circle-triangle-w {
+  background-position: -96px 0;
+}
+
+.ui-datepicker-next-hover,
+.ui-datepicker-prev-hover {
+  border: none;
+  background: #f2f2f2;
+  font-weight: normal;
+  color: #2b2b2b;
+  border-radius: 50%;
+}
