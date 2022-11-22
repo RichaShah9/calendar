@@ -1,3 +1,42 @@
+const events = [
+  {
+    title: "All Day Event",
+    start: "2022-11-01",
+  },
+  {
+    title: "Long Event",
+    start: "2022-11-07",
+    end: "2022-11-10",
+  },
+  {
+    title: "Conference",
+    start: "2022-11-11",
+    end: "2022-11-13",
+  },
+  {
+    title: "Birthday Party",
+    start: "2022-11-13T07:00:00",
+  },
+];
+
+function addButton(event) {
+  $("#schedule-add").modal("show");
+}
+
+const addEvent = () => {
+  var subject = document.getElementById("subject")
+  var from = document.getElementById("fromDatePicker").value;
+  var to = document.getElementById("toDatePicker").value;
+  events.push({
+    title: subject,
+    start: moment(from).format("YYYY-MM-DD"),
+    end: moment(to).format("YYYY-MM-DD")
+  })
+}
+const openModel = (info) => {
+  $("#schedule-add").modal("show");
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   var calendarEl = document.getElementById("calendar");
 
@@ -7,6 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "dayGridMonth",
     initialDate: new Date(),
+    selectable: true,
+    selectHelper: true,
     headerToolbar: {
       left: "today prev,next",
       center: "title",
@@ -18,26 +59,17 @@ document.addEventListener("DOMContentLoaded", function () {
       week: "Week",
       day: "Day",
     },
-    events: [
-      {
-        title: "All Day Event",
-        start: "2022-11-01",
-      },
-      {
-        title: "Long Event",
-        start: "2022-11-07",
-        end: "2022-11-10",
-      },
-      {
-        title: "Conference",
-        start: "2022-11-11",
-        end: "2022-11-13",
-      },
-      {
-        title: "Birthday Party",
-        start: "2022-11-13T07:00:00",
-      },
-    ],
+    events,
+    eventClick: function (event) {
+      var modal = $("#schedule-edit");
+      modal.modal();
+    },
+    select: function (event) {
+      openModel();
+    },
+    dateClick: function (info) {
+      openModel();
+    },
   });
 
   calendar.render();
@@ -69,3 +101,6 @@ document.addEventListener("DOMContentLoaded", function () {
     datePicker.datepicker("setDate", new Date());
   });
 });
+
+$("#toDatePicker").datepicker();
+$("#fromDatePicker").datepicker();

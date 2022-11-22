@@ -129,7 +129,6 @@ a.ui-button:active,
 .ui-widget.ui-widget-content {
   border: none;
   font-family: system-ui;
-  margin-top: 16%;
 }
 
 .ui-datepicker .ui-datepicker-header {
