@@ -19,7 +19,6 @@ const events = [
     },
 ];
 
-
 $("#createBtn").click(function () {
     $("#schedule-add .form-control").val("");
     $("#schedule-add").modal("show");
@@ -29,10 +28,10 @@ const addEvent = () => {
     var subject = $("#subject").val();
     var from = $("#fromDate").val();
     var to = $("#toDate").val();
-	if(subject.trim() == ""){
-		alert('Title required to add event');
-		return;
-	}
+    if (subject.trim() == "") {
+        alert('Title required to add event');
+        return;
+    }
     calendar.addEvent({
         title: subject,
         start: moment(from).format("YYYY-MM-DD"),
@@ -42,7 +41,7 @@ const addEvent = () => {
     $("#schedule-add .form-control").val("");
 }
 
-const openModel = () => {
+const openModel = (info) => {
     // info
     $("#schedule-add").modal("show");
 };
@@ -76,8 +75,8 @@ document.addEventListener("DOMContentLoaded", function () {
             var modal = $("#schedule-edit");
         },
         select: function (info) {
-            debugger;
-            $('.datepicker').val(moment(info.start).format("YYYY-MM-DD hh:mm A"));
+            // YYYY-MM-DD hh:mm A
+            $('.datepicker').val(moment(info.start).format("YYYY-MM-DD"));
             InItDatePicker(info.start);
             openModel();
         },
@@ -120,27 +119,77 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function InItDatePicker(startdate) {
     // added additional 1 year due to bug of disabled months 
-    $('.datepicker').daterangepicker({
-        "singleDatePicker": true,
-        "showDropdowns": true,
-        "minYear": 1901,
-        "maxYear": parseInt(moment().format('YYYY'), 10) + 1,
-        "timePicker": true,
-        "autoApply": true,
-        "startDate":new Date(startdate),
-        "locale": {
-            "format": "YYYY-MM-DD hh:mm A",
-        },
-        "autoUpdateInput": false,
-    }, function (start, end, label) {
-
-    });
-
-    $('.datepicker').on('apply.daterangepicker', function (ev, picker) {
-        $(this).val(picker.startDate.format('YYYY-MM-DD hh:mm A'));
+    $('.date').datepicker({
+        'format': 'yyyy-m-d',
+        'autoclose': true
     });
 }
 
+function InitTimePicker() {
+    //$(".timepicker").daterangepicker({
+    //    "singleDatePicker": true,
+    //    timePicker: true,
+    //    timePicker24Hour: false,
+    //    timePickerIncrement: 15,
+    //    timePickerSeconds: false,
+    //    locale: {
+    //        format: 'HH:mm A'
+    //    }
+    //}).on('show.daterangepicker', function (ev, picker) {
+    //    picker.container.find(".calendar-table").hide();
+    //});
+
+    //$('.timepicker').on('apply.daterangepicker', function (ev, picker) {
+    //    $(this).val(picker.startDate.format('HH:mm A'));
+    //});
+
+    $('.time').timepicker({ 'scrollDefault': 'now' });
+}
+
+//YYYY-MM-DD hh:mm A
+
 $(document).ready(function () {
     InItDatePicker();
+    InitTimePicker();
+    $('#datepairExample').datepair();
+
+    var hospitalOptions = [];
+    for (var i = 1; i <= 10; i++) {
+        hospitalOptions.push({ id: i, text: "Guest "+i });
+    }
+    $("#guest").select2({
+        placeholder:'Add guests',
+        multiple: false,
+        width: '100%',
+        data: hospitalOptions
+    });
+    $("#guest").val(null).trigger('change');
+    var lstGuest = [];
+    $('#guest').on('select2:selecting', function (e) {
+        var list = document.getElementById('guests');
+        const guest = e.params.args.data
+
+        if (!lstGuest.includes(guest?.id)) {
+            //add list element
+            var entry = document.createElement('li');
+            entry.appendChild(document.createTextNode(guest?.text));
+            list.appendChild(entry);
+
+            lstGuest.push(guest?.id);
+        }
+
+        setTimeout(function () {
+            $("#guest").val(null).trigger('change');
+        }, 50);
+    });
+
+    $("#chkAllDay").click(function () {
+        if ($(this).is(':checked')) {
+            $(".divToDatePicker").addClass("d-none");
+            $(".divTimePicker").removeClass("d-none");
+        } else {
+            $(".divTimePicker").addClass("d-none");
+            $(".divToDatePicker").removeClass("d-none");
+        }
+    });
 })
